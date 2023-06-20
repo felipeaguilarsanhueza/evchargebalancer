@@ -1,8 +1,12 @@
 from flask import Flask, request, render_template, jsonify, redirect, url_for
 from pulp import LpMaximize, LpProblem, LpStatus, lpSum, LpVariable
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
+import os
+
 
 app = Flask(__name__)
 
@@ -57,7 +61,15 @@ def restart():
     limites = [500] * 24
     cant_cargadores_vip = 2
     cant_cargadores_controlados = 4
+
+    # Intenta eliminar la gráfica si existe
+    try:
+        os.remove('static/graph.png')
+    except FileNotFoundError:
+        pass
+
     return redirect(url_for('update_limits'))
+
 
 
 @app.route('/resultado', methods=['GET'])
@@ -138,6 +150,9 @@ def solve_problem():
 
     # Guardar el gráfico como archivo
     plt.savefig('static/graph.png')
+
+    #   Limpiar la figura después de guardarla
+    plt.clf()
 
     # Retorna la solución como JSON
     return solucion_controlados, solucion_vip
