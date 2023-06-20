@@ -1,1 +1,1 @@
-web: gunicorn evchargebalancer.py:app
+web: gunicorn evchargebalancer:app
