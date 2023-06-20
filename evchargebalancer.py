@@ -15,7 +15,7 @@ def home():
     return render_template('home.html')
 
 # Variables globales para los límites, cantidad de cargadores VIP y cantidad de cargadores controlados
-limites = [500] * 24  # Límites predeterminados
+limites = [200] * 24  # Límites predeterminados
 cant_cargadores_vip = 2  # Cantidad de cargadores VIP predeterminada
 cant_cargadores_controlados = 4  # Cantidad de cargadores controlados predeterminada
 
@@ -64,7 +64,7 @@ def update_limits():
 @app.route('/restart', methods=['GET'])
 def restart():
     global limites, cant_cargadores_vip, cant_cargadores_controlados
-    limites = [500] * 24
+    limites = [200] * 24
     cant_cargadores_vip = 2
     cant_cargadores_controlados = 4
 
@@ -126,7 +126,10 @@ def solve_problem():
     # Calcular la corriente acumulada para todos los cargadores
     solucion_total = np.concatenate((solucion_controlados, solucion_vip), axis=0)
     solucion_acumulada_total = np.cumsum(solucion_total, axis=0)
-
+    
+    sns.set(style="darkgrid")
+    #plt.figure(figsize=(10,6))
+    
     # Crear un gráfico de la corriente de todos los cargadores y los límites
     for i, cargador in enumerate(solucion_acumulada_total):
         if i < len(solucion_controlados):
@@ -151,13 +154,13 @@ def solve_problem():
     sns.despine()  # Remover los bordes del gráfico
     plt.tight_layout()  # Ajustar los márgenes del gráfico
 
-    # Ubicación personalizada de la leyenda fuera del gráfico principal
-    plt.legend(bbox_to_anchor=(1.04, 0.5), loc="center left", borderaxespad=0.)
+    # Añadir la leyenda fuera del gráfico
+    plt.legend(bbox_to_anchor=(1.04, 0.5), loc="center left", borderaxespad=0)
 
-    # Guardar el gráfico como archivo
-    plt.savefig('static/graph.png')
+    # Guardar el gráfico, asegurándote de incluir la leyenda en el área de salida
+    plt.savefig('static/graph.png', bbox_inches='tight')
 
-    #   Limpiar la figura después de guardarla
+    # Limpiar la figura después de guardarla
     plt.clf()
 
     # Retorna la solución como JSON
