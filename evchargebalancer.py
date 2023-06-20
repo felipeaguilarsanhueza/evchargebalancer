@@ -40,7 +40,9 @@ def update_limits():
             return jsonify({"error": "La cantidad de cargadores VIP y/o cargadores controlados no es válida"}), 400
 
         # Calcular la corriente mínima total (6A por cada cargador)
-        min_current = 6 * (cant_cargadores_vip + cant_cargadores_controlados)
+        min_current_vip = 32 * cant_cargadores_vip
+        min_current_controlados = 6 * cant_cargadores_controlados
+        min_current = min_current_vip + min_current_controlados
 
         # Verificar que cada uno de los nuevos límites es mayor que la corriente mínima
         for lim in new_limits:
