@@ -10,6 +10,10 @@ import os
 
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return render_template('home.html')
+
 # Variables globales para los límites, cantidad de cargadores VIP y cantidad de cargadores controlados
 limites = [500] * 24  # Límites predeterminados
 cant_cargadores_vip = 2  # Cantidad de cargadores VIP predeterminada
