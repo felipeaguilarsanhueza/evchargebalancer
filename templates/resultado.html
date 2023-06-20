@@ -2,64 +2,95 @@
 <html>
 <head>
     <title>Resultado</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f5f5f5;
+        }
+
+        .btn-reiniciar {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Resultado</h1>
+    <div class="container">
+        <h1>Resultado</h1>
 
+        <h2>Gráfico de Corriente Acumulada</h2>
+        <img src="{{ url_for('static', filename='graph.png') }}" alt="Gráfico" class="img-fluid">
 
-    <h2>Gráfico de Corriente Acumulada</h2>
-    <img src="{{ url_for('static', filename='graph.png') }}" alt="Gráfico">
-
-
-
-    <h2>Cargadores Controlados</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Hora</th>
-                {% for i in range(cant_cargadores_controlados) %}
-                    <th>Cargador Controlado {{ i+1 }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for h in range(24) %}
+        <h2>Cargadores Controlados</h2>
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ h }}</td>
+                    <th>Hora</th>
                     {% for i in range(cant_cargadores_controlados) %}
-                        <td>{{ solucion_controlados[i][h] }} A</td>
+                        <th>Cargador Controlado {{ i+1 }}</th>
                     {% endfor %}
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <h2>Cargadores VIP</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Hora</th>
-                {% for i in range(cant_cargadores_vip) %}
-                    <th>Cargador VIP {{ i+1 }}</th>
+            </thead>
+            <tbody>
+                {% for h in range(24) %}
+                    <tr>
+                        <td>{{ h }}</td>
+                        {% for i in range(cant_cargadores_controlados) %}
+                            <td>{{ solucion_controlados[i][h] }} A</td>
+                        {% endfor %}
+                    </tr>
                 {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for h in range(24) %}
+            </tbody>
+        </table>
+
+        <h2>Cargadores VIP</h2>
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ h }}</td>
+                    <th>Hora</th>
                     {% for i in range(cant_cargadores_vip) %}
-                        <td>{{ solucion_vip[i][h] }} A</td>
+                        <th>Cargador VIP {{ i+1 }}</th>
                     {% endfor %}
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for h in range(24) %}
+                    <tr>
+                        <td>{{ h }}</td>
+                        {% for i in range(cant_cargadores_vip) %}
+                            <td>{{ solucion_vip[i][h] }} A</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
+        <form method="GET" action="{{ url_for('restart') }}">
+            <button type="submit" class="btn btn-primary btn-reiniciar">Reiniciar</button>
+        </form>
+    </div>
 
-<form method="GET" action="{{ url_for('restart') }}">
-    <button type="submit" class="btn btn-primary">Reiniciar</button>
-</form>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
