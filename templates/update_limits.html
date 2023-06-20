@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Configuración de límites y cantidad de cargadores</title>
+</head>
+<body>
+    <h1>Configuración de límites y cantidad de cargadores</h1>
+    <form method="POST" action="/update_limits">
+        <h2>Límites:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Hora</th>
+                    <th>Límite (A)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hour in range(24) %}
+                <tr>
+                    <td>{{ hour }}</td>
+                    <td><input type="number" name="limits[]" min="0" value="{{ limits[hour] }}" required></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Cantidad de cargadores:</h2>
+        <label for="cant_cargadores_vip">Cantidad de cargadores VIP:</label>
+        <input type="number" name="cant_cargadores_vip" id="cant_cargadores_vip" min="0" value="{{ cant_cargadores_vip }}" required>
+
+        <label for="cant_cargadores_controlados">Cantidad de cargadores controlados:</label>
+        <input type="number" name="cant_cargadores_controlados" id="cant_cargadores_controlados" min="0" value="{{ cant_cargadores_controlados }}" required>
+
+        <br><br>
+        <input type="submit" value="Guardar">
+    </form>
+</body>
+</html>

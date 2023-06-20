@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultado</title>
+</head>
+<body>
+    <h1>Resultado</h1>
+
+    <h2>Cargadores Controlados</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Hora</th>
+                {% for i in range(cant_cargadores_controlados) %}
+                    <th>Cargador Controlado {{ i+1 }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for h in range(24) %}
+                <tr>
+                    <td>{{ h }}</td>
+                    {% for i in range(cant_cargadores_controlados) %}
+                        <td>{{ solucion_controlados[i][h] }} A</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Cargadores VIP</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Hora</th>
+                {% for i in range(cant_cargadores_vip) %}
+                    <th>Cargador VIP {{ i+1 }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for h in range(24) %}
+                <tr>
+                    <td>{{ h }}</td>
+                    {% for i in range(cant_cargadores_vip) %}
+                        <td>{{ solucion_vip[i][h] }} A</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Gráfico de Corriente Acumulada</h2>
+    <img src="{{ url_for('static', filename='graph.png') }}" alt="Gráfico">
+
+
+    <a href="{{ url_for('restart') }}" class="btn btn-primary">Reiniciar</a>
+
+</body>
+</html>
