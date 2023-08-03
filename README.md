@@ -41,7 +41,7 @@ http://localhost:5000/
 
 Puedes probar una demostración de la aplicación en el siguiente enlace de Heroku:
 
-[Demo de EV Charge Balancer](https://evchargebalancer-ca54350e9a09.herokuapp.com/)
+[Demo de EV Charge Balancer]([https://evchargebalancer-ca54350e9a09.herokuapp.com/](https://evchargebalancer-0uh1-dev.fl0.io/))
 
 ### Contribuciones
 
