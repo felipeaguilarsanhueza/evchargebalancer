@@ -41,7 +41,7 @@ http://localhost:5000/
 
 Puedes probar una demostración de la aplicación en el siguiente enlace de fl0:
 
-[Demo de EV Charge Balancer]((https://evchargebalancer-0uh1-dev.fl0.io/))
+[Demo de EV Charge Balancer](https://evchargebalancer-0uh1-dev.fl0.io/)
 
 ### Contribuciones
 
